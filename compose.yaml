@@ -1,0 +1,11 @@
+name: deepclaude
+services:
+  server:
+    image: chris2023cui/deepclaude-server:latest
+    container_name: deepclaude-server
+    build:
+      context: .
+    ports:
+      - 9013:9013
+    env_file:
+      - .env
