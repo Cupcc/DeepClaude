@@ -95,7 +95,7 @@ Step 4. 按照环境变量当中的注释依次填写配置信息
 ALLOW_API_KEY=sk-dqC7ZTa9mCxxxxxx
 
 # 调用的API
-BASE_API_KEY=sk-tRVVCcCmQq8zi3MhszwUx5OBNVx70c9NRN154VrVDh2orcMn
+BASE_API_KEY=sk-tRVVCcCmQq8***************rVDh2orcMn
 BASE_API_URL=https://xxxxxxx/v1/chat/completions
 ```
 
@@ -103,7 +103,7 @@ Step 5. 本地运行程序
 
 ```bash
 # 本地运行
-uvicorn app.main:app
+uvicorn app.main:app --host 0.0.0.0 --port 9013
 ```
 
 Step 6. 配置程序到你的 Chatbox（推荐 [NextChat](https://nextchat.dev/)、[ChatBox](https://chatboxai.app/zh)、[LobeChat](https://lobechat.com/)）

@@ -16,8 +16,10 @@ logger.info(f"ALLOW_API_KEY环境变量状态: {'已设置' if ALLOW_API_KEY els
 if not ALLOW_API_KEY:
     raise ValueError("ALLOW_API_KEY environment variable is not set")
 
-# 打印API密钥的前4位用于调试
-logger.info(f"Loaded API key starting with: {ALLOW_API_KEY[:4] if len(ALLOW_API_KEY) >= 4 else ALLOW_API_KEY}")
+# 打印API密钥，仅用于调试
+logger.info(
+    f"Loaded API key starting with: {ALLOW_API_KEY if len(ALLOW_API_KEY) >= 4 else ALLOW_API_KEY}"
+)
 
 
 async def verify_api_key(authorization: Optional[str] = Header(None)) -> None:
@@ -31,17 +33,11 @@ async def verify_api_key(authorization: Optional[str] = Header(None)) -> None:
     """
     if authorization is None:
         logger.warning("请求缺少Authorization header")
-        raise HTTPException(
-            status_code=401,
-            detail="Missing Authorization header"
-        )
-    
+        raise HTTPException(status_code=401, detail="Missing Authorization header")
+
     api_key = authorization.replace("Bearer ", "").strip()
     if api_key != ALLOW_API_KEY:
         logger.warning(f"无效的API密钥: {api_key}")
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid API key"
-        )
-    
+        raise HTTPException(status_code=401, detail="Invalid API key")
+
     logger.info("API密钥验证通过")
